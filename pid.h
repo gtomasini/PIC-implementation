@@ -13,10 +13,10 @@ public:
         _setPoint = val;
     }
 
-    double control(double pVal) {
+    double control(double sensedOut) {
         auto dt = float(clock()-_lastTime)/CLOCKS_PER_SEC;
         _lastTime = clock();
-        auto error = _setPoint - pVal;
+        auto error = _setPoint - sensedOut;
         _integral += error*dt;    
         auto derivative = (error-_lastError)/dt;
         auto ctrlSignal = _kP*error + _kI*_integral + _kD*derivative; 
